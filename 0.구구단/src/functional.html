@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
+    <!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
+    <script type="text/babel">
+      "use strict";
+
+      const GuGuDan = () => {
+        const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+        const [second, setSecond] = React.useState(
+          Math.ceil(Math.random() * 9)
+        );
+        const [inputValue, setInputValue] = React.useState("");
+        const [result, setResult] = React.useState("");
+
+        const onSubmit = (e) => {
+          e.preventDefault();
+          setResult(first * second == inputValue ? "정답입니다" : "실패.");
+          console.log(result);
+        };
+        return (
+          <>
+            <p>
+              {first} * {second} 는??
+            </p>
+            <form onSubmit={onSubmit}>
+              <input
+                type="number"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+              <button>Click</button>
+            </form>
+            <p>{result}</p>
+          </>
+        );
+      };
+    </script>
+    <script type="text/babel">
+      ReactDOM.createRoot(document.querySelector("#root")).render(<GuGuDan />);
+    </script>
+  </body>
+</html>
