@@ -1,5 +1,7 @@
 const path = require("path");
-const refreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   name: "wordrelay-setting",
@@ -35,7 +37,13 @@ module.exports = {
     static: { directory: path.resolve(__dirname) },
     hot: true,
   },
-  plugins: [new refreshWebpackPlugin()],
+  plugins: [
+    new RefreshWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Hot Module Replacement",
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   output: {
     path: path.join(__dirname, "dist"),
     filename: "app.js",
